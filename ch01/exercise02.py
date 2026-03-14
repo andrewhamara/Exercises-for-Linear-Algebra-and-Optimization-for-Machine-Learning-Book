@@ -47,14 +47,14 @@ m_3 = 0
 m_3 += C.shape[0] * C.shape[1] * A.shape[1]
 resulting_matrix_3 = np.matmul(C, A)
 m_3 += resulting_matrix_3.shape[0] * resulting_matrix_3.shape[1] * B.shape[1]
-print(f'(CA)B had {m_3} multiplications') # -> 1400
+print(f'(CA)B had {m_3} multiplications') # -> 400
 
 # C(AB)
 m_4 = 0
 m_4 += A.shape[0] * A.shape[1] * B.shape[1]
 resulting_matrix_4 = np.matmul(A, B)
 m_4 += C.shape[0] * C.shape[1] * resulting_matrix_4.shape[1]
-print(f'C(AB) had {m_4} multiplications') # -> 1400
+print(f'C(AB) had {m_4} multiplications') # -> 1200
 
 # we prefer CA(B)
 assert m_4 > m_3

@@ -1,15 +1,15 @@
 import numpy as np
 
 def gram_schmidt(V):
-    row_1_normalized = V[0] / np.sqrt(np.dot(V[0], V[0]))
-    Q = [row_1_normalized]
+    col_1_normalized = V[:,0] / np.sqrt(np.dot(V[:,0], V[:,0]))
+    Q = [col_1_normalized]
 
-    n_rows = V.shape[0]
-    for i in range(1, n_rows):
-        Q_i = V[i]
+    n_cols = V.shape[1]
+    for i in range(1, n_cols):
+        Q_i = V[:,i]
 
         for k in range(i):
-            Vi_projected_onto_Qk = (np.dot(V[i], Q[k]) / np.dot(Q[k], Q[k])) * Q[k]
+            Vi_projected_onto_Qk = (np.dot(V[:,i], Q[k]) / np.dot(Q[k], Q[k])) * Q[k]
             Q_i -= Vi_projected_onto_Qk
 
         Q_i /= np.sqrt(np.dot(Q_i, Q_i))
@@ -26,5 +26,5 @@ if __name__ == '__main__':
 
     Q = gram_schmidt(V)
 
-    assert np.allclose(Q @ Q.T, np.eye(Q.shape[0]))
+    assert np.allclose(Q.T @ Q, np.eye(Q.shape[0]))
     print("Q forms an orthonormal basis for the space spanned by V")
